@@ -4,6 +4,8 @@ import { Hero } from "../components/Hero";
 import { ProductCard } from "../components/ProductCard";
 import { PromoBar } from "../components/PromoBar";
 import { EditorialGrid } from "../components/EditorialGrid";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
 
 export default function Home() {
   const highlight = [
@@ -28,6 +30,17 @@ export default function Home() {
             {highlight.map((p, i) => (
               <ProductCard key={i} title={p.title} price={p.price} badge={p.badge} />
             ))}
+          </div>
+        </section>
+        <section className="mx-auto max-w-7xl px-4 pb-16">
+          <div className="mb-6 flex items-center gap-2">
+            <Badge>Femmes</Badge>
+            <Badge>Enfants</Badge>
+            <Badge>Hommes</Badge>
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border bg-card px-5 py-6">
+            <p className="text-sm text-muted-foreground">Découvrez nos catégories phares et nos tailles EU réalistes.</p>
+            <Button variant="default">Accéder à la boutique</Button>
           </div>
         </section>
         <EditorialGrid />

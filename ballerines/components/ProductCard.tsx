@@ -1,13 +1,16 @@
+import Link from "next/link";
+
 type Props = {
   title: string;
   price: number;
   image?: string;
   badge?: string;
+  href?: string;
 };
 
-export function ProductCard({ title, price, image = "/file.svg", badge }: Props) {
+export function ProductCard({ title, price, image = "/file.svg", badge, href = "/product/sample" }: Props) {
   return (
-    <div className="group overflow-hidden rounded-xl border bg-card">
+    <Link href={href} className="group block overflow-hidden rounded-xl border bg-card">
       <div className="relative aspect-[4/5] w-full bg-muted">
         <img src={image} alt="" className="h-full w-full object-cover transition-transform group-hover:scale-105" />
         {badge ? (
@@ -23,7 +26,7 @@ export function ProductCard({ title, price, image = "/file.svg", badge }: Props)
         </div>
         <div className="font-medium">{(price / 100).toFixed(2)} €</div>
       </div>
-    </div>
+    </Link>
   );
 }
 

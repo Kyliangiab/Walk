@@ -38,7 +38,7 @@ export default function ShopPage() {
           </div>
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
             {mockProducts.map((p, i) => (
-              <ProductCard key={i} title={p.title} price={p.price} badge={p.badge} />
+              <ProductCard key={i} title={p.title} price={p.price} badge={p.badge} href={`/product/${i+1}`} />
             ))}
           </div>
         </section>

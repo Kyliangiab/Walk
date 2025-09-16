@@ -1,40 +1,51 @@
-# Payload CMS Setup Guide
+# Payload CMS Setup Guide avec Supabase
 
 ## 🚀 Installation et Configuration
 
 ### 1. Prérequis
 - Node.js 18+
-- MongoDB (local ou cloud)
+- Compte Supabase (gratuit)
 
-### 2. Variables d'environnement
-Ajoutez ces variables à votre fichier `.env` :
+### 2. Configuration Supabase
+1. Créez un projet sur [supabase.com](https://supabase.com)
+2. Récupérez votre URL de base de données PostgreSQL
+3. Ajoutez ces variables à votre fichier `.env` :
 
 ```env
-# Payload CMS - MongoDB
-DATABASE_URL=mongodb://localhost:27017/ballerines-crm
+# Payload CMS - Supabase PostgreSQL
+DATABASE_URL=postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres
 
 # Payload CMS
 PAYLOAD_SECRET=your-payload-secret-here
+
+# Supabase (déjà configuré)
+NEXT_PUBLIC_SUPABASE_URL=https://[YOUR-PROJECT-REF].supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 ```
 
-### 3. Installation MongoDB (optionnel)
-Si vous n'avez pas MongoDB installé localement :
+### 3. Avantages de Supabase
+- ✅ Base de données PostgreSQL gérée
+- ✅ Interface d'administration intégrée
+- ✅ Sauvegardes automatiques
+- ✅ Scaling automatique
+- ✅ Pas d'installation locale nécessaire
 
-```bash
-# Avec Docker
-docker run -d -p 27017:27017 --name mongodb mongo:latest
+### 4. Récupération de l'URL Supabase
+1. Allez dans votre projet Supabase
+2. Settings → Database
+3. Copiez la "Connection string" et remplacez `[YOUR-PASSWORD]` par votre mot de passe
+4. Ou utilisez le format : `postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres`
 
-# Ou avec Homebrew (macOS)
-brew install mongodb-community
-brew services start mongodb-community
-```
-
-### 4. Initialisation
+### 5. Initialisation
 ```bash
 # Générer les types TypeScript
 npm run payload:generate
 
-# Initialiser Payload avec des données de base
+# Exécuter les migrations (automatique avec Supabase)
+npm run payload:migrate
+
+# Initialiser avec des données de base
 npm run payload:init
 ```
 
@@ -156,11 +167,17 @@ Payload s'intègre parfaitement avec :
 
 ## 🆘 Dépannage
 
-### Erreur de connexion MongoDB
-Vérifiez que MongoDB est démarré et que l'URL de connexion est correcte.
+### Erreur de connexion Supabase
+- Vérifiez que votre URL DATABASE_URL est correcte
+- Assurez-vous que votre projet Supabase est actif
+- Vérifiez que le mot de passe dans l'URL est correct
 
 ### Erreur de types TypeScript
 Exécutez `npm run payload:generate` pour régénérer les types.
 
 ### Interface admin inaccessible
 Vérifiez que le serveur de développement est démarré et que les routes sont correctement configurées.
+
+### Problème de permissions Supabase
+- Vérifiez que votre clé de service a les bonnes permissions
+- Assurez-vous que les politiques RLS sont correctement configurées

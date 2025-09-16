@@ -1,5 +1,5 @@
 import { buildConfig } from 'payload'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import path from 'path'
@@ -35,7 +35,9 @@ export default buildConfig({
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
   plugins: [],
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URL!,
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URL!,
+    },
   }),
 })

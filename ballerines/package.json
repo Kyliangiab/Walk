@@ -13,7 +13,8 @@
     "payload:migrate": "payload migrate",
     "payload:init": "tsx scripts/init-payload.ts",
     "payload:setup": "tsx scripts/setup-supabase.ts",
-    "env:configure": "tsx scripts/configure-env.ts"
+    "env:configure": "tsx scripts/configure-env.ts",
+    "env:add-payload": "tsx scripts/add-payload-to-env.ts"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",
